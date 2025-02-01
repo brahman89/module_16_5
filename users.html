@@ -1,0 +1,53 @@
+{% extends 'main.html'%}
+{% block crud_container %}
+<section class="container-fluid">
+    <form method="post" action="/">
+        <div class="col-auto">
+            <div class="input-group mb-3">
+                <input type="text" name="username" value="{{username}}" class="form-control"
+                       placeholder="New user name" aria-label="Add user"/>
+                <input type="text" name="age" value="{{age}}" class="form-control"
+                       placeholder="Age" aria-label="Add user"
+                       aria-describedby="button-addon2"/>
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2"
+                        data-mdb-ripple-colour="dark">
+                    Add user
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+{% if user %}
+<article class="card container fluid">
+    <br>
+    <h2> ID: {{user.id}}</h2>
+    <p>
+        <strong> Name:</strong> {{user.username}}  |  <strong>Age: </strong> {{user.age}}
+
+    </p>
+</article>
+<form method="get" action="/">
+    <button class="btn btn-outline-primary" type="submit" id="button-addon2"
+                        data-mdb-ripple-colour="dark">
+                    Back
+            </button>
+</form>
+{% else %}
+<section class="container-fluid">
+    <h2 align="center"> Users </h2>
+
+    <br>
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            {% for user in users %}
+            <li class="list-group-item"> ID {{user.id}} <a href="/users/{{user.id}}"> {{user.username}} </a> {{user.age}}
+            </li>
+            {% endfor %}
+
+
+        </ul>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
